@@ -15,7 +15,7 @@ ATLAS_DIR="$HOME/.atlas"
 BIN_DIR="$ATLAS_DIR/bin"
 DATA_DIR="$ATLAS_DIR/data"
 LOG_DIR="$ATLAS_DIR/logs"
-APP_DIR="$HOME/Applications"
+APP_DIR="/Applications"
 LAUNCH_AGENT="$HOME/Library/LaunchAgents/dev.atlasagent.plist"
 REPO="vortex-303/atlas-releases"
 PORT=8642
@@ -136,10 +136,10 @@ exec "$(dirname "$0")/../../atlas-agent/uninstall.sh" 2>/dev/null || \
 UNINSTALL
 chmod +x "$BIN_DIR/atlas-uninstall"
 
-# --- Start server ---
+# --- Start app (menu bar + server) ---
 echo "  Starting Atlas Agent..."
-launchctl load "$LAUNCH_AGENT"
-
+launchctl unload "$LAUNCH_AGENT" 2>/dev/null || true
+open "$APP_DIR/Atlas Agent.app"
 
 # --- Wait for server ---
 echo "  Waiting for server to start..."
